@@ -74,17 +74,21 @@ class FullscreenActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val policy = ThreadPolicy.Builder().permitAll().build()
+        //val policy = ThreadPolicy.Builder().permitAll().build()
+        //StrictMode.setThreadPolicy(policy)
+        //TODO: get ride of this policy the good way
 
-        StrictMode.setThreadPolicy(policy)
-
-        val token = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImYxNDQ3Zjc0LWNlMDgtNDRjMC04N2U0LTdlNGQ2MTQxOGM0NCJ9.eyJjbGllbnRfaWQiOiJsb2NhbC10b2tlbiIsInJvbGUiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZSI6Ii90aGluZ3M6cmVhZHdyaXRlIiwiaWF0IjoxNjQ3NDU1NDg2LCJpc3MiOiJOb3Qgc2V0LiJ9.wCKBId6rQsj-6VRHUBmE_ZQ-vOL8WTXEfcdyGTfZCBPSNQ6GITGDB_RLkKxE-kH_NC4URanMLZbQKzlYN2ZSmA"
-
+        val token = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZlNDEwNjFlLWJmZWQtNDExOC"+
+                "04ZjExLTk5NmQzNDZiNGVjMiJ9.eyJjbGllbnRfaWQiOiJsb2NhbC10b2tlbiIsInJvbGUiOiJ"+
+                "hY2Nlc3NfdG9rZW4iLCJzY29wZSI6Ii90aGluZ3M6cmVhZHdyaXRlIiwiaWF0IjoxNjQ3NjEyM"+
+                "TgxLCJpc3MiOiJOb3Qgc2V0LiJ9.sXxovXVCXMcuaZuilw70N7YOSLqF386F-CWDqAztMQh5PK"+
+                "8KHz0Tb4kdBboK0r-Vw0NH69f13lUIj7S07sNbfw"
         val host = "10.0.2.2"
         val port = "8080"
+        //TODO: get this from a configuration menu in the UI
 
         var gateway = WebtioGateway(host, token, port)
-        println("DATA: ${gateway.getThings()}")
+        gateway.initializeThings()
 
         binding = ActivityFullscreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
