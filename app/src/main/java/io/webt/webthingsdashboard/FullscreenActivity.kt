@@ -89,7 +89,8 @@ class FullscreenActivity : AppCompatActivity() {
 
         var gateway = WebtioGateway(host, token, port)
         gateway.initializeThings()
-
+        for (thing in gateway.gwThings)
+            println(thing.value.getRawData())
         binding = ActivityFullscreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

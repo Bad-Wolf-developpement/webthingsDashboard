@@ -17,13 +17,13 @@ import org.json.JSONArray
  */
 
 class WebtioGateway(private val HOST: String,
-                   private val TOKEN: String,
+                   internal val TOKEN: String,
                    private val PORT: String,
                     private val SSL: Boolean = false) {
 
-    private var client = OkHttpClient()
-    private var BASE_URL: String
-    private var gwThings: MutableList<WebtioThings> = mutableListOf()//list of things object
+    internal val client = OkHttpClient()
+    internal var BASE_URL: String
+    var gwThings: MutableMap<String, WebtioThings> = mutableMapOf()//list of things object
 
     init {
         if (SSL){
@@ -68,7 +68,7 @@ class WebtioGateway(private val HOST: String,
      * return -- function return
      */
 
-    private fun asyncCall(func: () -> Any): Any{
+    internal fun asyncCall(func: () -> Any): Any{
         var result = runBlocking {
             withContext(Dispatchers.Default) { func() }
         }
@@ -83,7 +83,7 @@ class WebtioGateway(private val HOST: String,
         var things = asyncCall(::getThings) as MutableMap<String, String>
 
         for (thing in things) {
-            gwThings.add(WebtioThings(thing.key as String, thing.value as String))
+            gwThings.put(thing.key as String, WebtioThings(thing.key as String, thing.value as String, this))
         }
     }
 }
