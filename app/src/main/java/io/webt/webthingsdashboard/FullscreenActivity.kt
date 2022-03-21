@@ -74,10 +74,6 @@ class FullscreenActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //val policy = ThreadPolicy.Builder().permitAll().build()
-        //StrictMode.setThreadPolicy(policy)
-        //TODO: get ride of this policy the good way
-
         val token = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZlNDEwNjFlLWJmZWQtNDExOC"+
                 "04ZjExLTk5NmQzNDZiNGVjMiJ9.eyJjbGllbnRfaWQiOiJsb2NhbC10b2tlbiIsInJvbGUiOiJ"+
                 "hY2Nlc3NfdG9rZW4iLCJzY29wZSI6Ii90aGluZ3M6cmVhZHdyaXRlIiwiaWF0IjoxNjQ3NjEyM"+
@@ -90,7 +86,8 @@ class FullscreenActivity : AppCompatActivity() {
         var gateway = WebtioGateway(host, token, port)
         gateway.initializeThings()
         for (thing in gateway.gwThings)
-            println(thing.value.getRawData())
+            thing.value.initProperties()
+
         binding = ActivityFullscreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

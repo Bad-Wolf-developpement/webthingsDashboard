@@ -7,6 +7,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.IOException
 import org.json.JSONArray
+import java.net.Inet6Address
+import java.net.InetAddress
 
 
 /*
@@ -15,8 +17,7 @@ import org.json.JSONArray
  * host -- String: url or ip of the webthings gateway
  * token -- String: web token genated in the gatway to avoid login with username and password
  */
-
-class WebtioGateway(private val HOST: String,
+class WebtioGateway(internal val HOST: String,
                    internal val TOKEN: String,
                    private val PORT: String,
                     private val SSL: Boolean = false) {
@@ -44,7 +45,6 @@ class WebtioGateway(private val HOST: String,
             .header("User-Agent", "OkHttp Headers.java")
             .addHeader("Accept", "application/json")
             .addHeader("Authorization", "Bearer $TOKEN").build()
-
 
         var response = client.newCall(request).execute()
         if (!response.isSuccessful){
@@ -80,10 +80,26 @@ class WebtioGateway(private val HOST: String,
      * fill a list of gwThings
      */
     fun initializeThings(){
+        if (!this.isAvailable(this.HOST)){
+            println("Gateway Unavailable")
+            return
+        }
         var things = asyncCall(::getThings) as MutableMap<String, String>
 
         for (thing in things) {
             gwThings.put(thing.key as String, WebtioThings(thing.key as String, thing.value as String, this))
+            //todo change the type to avoid double .key call
         }
+    }
+    /*
+     *Method to test if gateway is reachable before trying to send request
+     *
+     * host -- gateway ip or url
+     *
+     * return Boolean
+     */
+    internal fun isAvailable(host: String): Boolean{
+        val result = asyncCall({ InetAddress.getByName(host).isReachable(30) }) as Boolean
+        return result
     }
 }
