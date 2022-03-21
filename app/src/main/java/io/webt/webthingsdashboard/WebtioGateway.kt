@@ -7,7 +7,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.IOException
 import org.json.JSONArray
-import java.net.Inet6Address
 import java.net.InetAddress
 
 
@@ -88,7 +87,10 @@ class WebtioGateway(internal val HOST: String,
 
         for (thing in things) {
             gwThings.put(thing.key as String, WebtioThings(thing.key as String, thing.value as String, this))
-            //todo change the type to avoid double .key call
+        }
+        //initialize propoerties of the things
+        for (thing in gwThings){
+            thing.value.initProperties()
         }
     }
     /*
