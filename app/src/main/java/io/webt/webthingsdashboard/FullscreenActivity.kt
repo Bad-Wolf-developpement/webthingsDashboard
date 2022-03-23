@@ -87,7 +87,10 @@ class FullscreenActivity : AppCompatActivity() {
         gateway.initializeThings()
         for (thing in gateway.gwThings.values)
             for (property in thing.thingProperties.values){
-                println("Thing: ${property.wtioThings.name} Property: ${property.name}")
+                //println("Thing: ${property.wtioThings.name} Property: ${property.name}")
+                if (property.name == "on"){
+                    property.updateValue("false")
+                }
             }
 
         binding = ActivityFullscreenBinding.inflate(layoutInflater)

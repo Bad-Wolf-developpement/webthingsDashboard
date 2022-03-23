@@ -1,7 +1,6 @@
 package io.webt.webthingsdashboard
 import okhttp3.Request
 import okio.IOException
-import org.json.JSONArray
 import org.json.JSONObject
 
 /*
@@ -12,7 +11,7 @@ import org.json.JSONObject
  * wtioGw -- gateway who own this thing
  */
 
-class WebtioThings (val id: String, var name: String, val wtioGw: WebtioGateway){
+class WebtioThings (id: String, var name: String, val wtioGw: WebtioGateway){
     internal val BASE_URL = "${wtioGw.BASE_URL}/${id}"
     internal val client = wtioGw.client
     internal val TOKEN = wtioGw.TOKEN
@@ -33,14 +32,12 @@ class WebtioThings (val id: String, var name: String, val wtioGw: WebtioGateway)
         return JSONObject(data)
     }
 
-    fun getRawData(): Any?{
-        if (!this.wtioGw.isAvailable(this.wtioGw.HOST)){
+    fun getRawData(): Any? {
+        if (!this.wtioGw.isAvailable(this.wtioGw.HOST)) {
             println("Gateway Unavailable")
             return null
         }
-        var rawData = wtioGw.asyncCall(::getData)
-
-        return rawData
+        return wtioGw.asyncCall(::getData)
     }
 
     fun initProperties(){
@@ -48,7 +45,8 @@ class WebtioThings (val id: String, var name: String, val wtioGw: WebtioGateway)
         val properties: JSONObject = data.get("properties") as JSONObject
         for (property in properties.keys()){
             val thingProperty = properties.get(property) as JSONObject
-            thingProperties.put(thingProperty.get("name") as String, WebtioProperty(thingProperty.get("name") as String, thingProperty.get("title") as String, this))
+            thingProperties.put(thingProperty.get("name") as String, WebtioProperty(thingProperty.get("name") as String, thingProperty.get("title") as String, this, thingProperty))
+
         }
     }
 }

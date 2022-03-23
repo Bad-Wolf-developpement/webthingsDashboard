@@ -18,42 +18,39 @@ import java.net.InetAddress
  */
 class WebtioGateway(internal val HOST: String,
                    internal val TOKEN: String,
-                   private val PORT: String,
-                    private val SSL: Boolean = false) {
+                   PORT: String,
+                    SSL: Boolean = false) {
 
     internal val client = OkHttpClient()
-    internal var BASE_URL: String
+    internal var BASE_URL: String = if (SSL){
+        "https://$HOST:$PORT/things"
+    }else{
+        "http://$HOST:$PORT/things"
+    }
     var gwThings: MutableMap<String, WebtioThings> = mutableMapOf()//list of things object
 
-    init {
-        if (SSL){
-            BASE_URL = "https://$HOST:$PORT/things"
-        }else{
-            BASE_URL = "http://$HOST:$PORT/things"
-        }
-    }
     /*
      *Get list of Things from the Gateway,
      *
      * return -- map of string, id : name
      */
-    fun getThings(): MutableMap<String, String> {
-        var things = mutableMapOf<String, String>()
-        var request = Request.Builder()
+    private fun getThings(): MutableMap<String, String> {
+        val things = mutableMapOf<String, String>()
+        val request = Request.Builder()
             .url(BASE_URL)
             .header("User-Agent", "OkHttp Headers.java")
             .addHeader("Accept", "application/json")
             .addHeader("Authorization", "Bearer $TOKEN").build()
 
-        var response = client.newCall(request).execute()
+        val response = client.newCall(request).execute()
         if (!response.isSuccessful){
             throw IOException("Unexpected code $response")
         }
-        var data = response.body!!.string()
+        val data = response.body!!.string()
         (0 until JSONArray(data).length()).forEach {
-            var json = JSONArray(data).getJSONObject(it)
-            var id = json.get("href").toString().removePrefix("/things/")
-            var name = json.get("title").toString()
+            val json = JSONArray(data).getJSONObject(it)
+            val id = json.get("href").toString().removePrefix("/things/")
+            val name = json.get("title").toString()
             things.put(id, name)
         }
         return things
@@ -68,7 +65,7 @@ class WebtioGateway(internal val HOST: String,
      */
 
     internal fun asyncCall(func: () -> Any): Any{
-        var result = runBlocking {
+        val result = runBlocking {
             withContext(Dispatchers.Default) { func() }
         }
         return result
@@ -81,18 +78,20 @@ class WebtioGateway(internal val HOST: String,
     fun initializeThings(){
         if (!this.isAvailable(this.HOST)){
             println("Gateway Unavailable")
+            //TODO: pop a toast instead
             return
         }
-        var things = asyncCall(::getThings) as MutableMap<String, String>
+        val things = asyncCall(::getThings) as MutableMap<String, String>
 
         for (thing in things) {
             gwThings.put(thing.key as String, WebtioThings(thing.key as String, thing.value as String, this))
         }
-        //initialize propoerties of the things
+        //initialize properties of the things
         for (thing in gwThings){
             thing.value.initProperties()
         }
     }
+
     /*
      *Method to test if gateway is reachable before trying to send request
      *
@@ -100,8 +99,7 @@ class WebtioGateway(internal val HOST: String,
      *
      * return Boolean
      */
-    internal fun isAvailable(host: String): Boolean{
-        val result = asyncCall({ InetAddress.getByName(host).isReachable(30) }) as Boolean
-        return result
+    internal fun isAvailable(host: String): Boolean {
+        return asyncCall { InetAddress.getByName(host).isReachable(30) } as Boolean
     }
 }
