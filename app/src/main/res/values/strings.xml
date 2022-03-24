@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">webthingsDashboard</string>
-    <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">Webthings\nGateway\nList</string>
+    <string name="dummy_content2">SETTINGS</string>
+    <string name="settings">Settings</string>
+    <string name="title_activity_settings_menu">SettingsMenu</string>
 </resources>

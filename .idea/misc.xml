@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/mverret/Programmation/webthingsDashboard/app/src/main/res/drawable/baseline_settings_24.xml" value="0.196" />
         <entry key="..\:/Users/mverret/Programmation/webthingsDashboard/app/src/main/res/layout/activity_fullscreen.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/mverret/Programmation/webthingsDashboard/app/src/main/res/layout/activity_settings_menu.xml" value="0.17395833333333333" />
+        <entry key="..\:/Users/mverret/Programmation/webthingsDashboard/app/src/main/res/menu/main_menu.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/mverret/Programmation/webthingsDashboard/app/src/main/res/xml/network_security_config.xml" value="0.1" />
       </map>
     </option>

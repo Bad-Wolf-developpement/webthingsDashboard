@@ -1,28 +1,24 @@
 package io.webt.webthingsdashboard
 
+import androidx.appcompat.app.AppCompatActivity
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
-import android.view.*
+import android.view.MotionEvent
+import android.view.View
+import android.view.WindowInsets
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import io.webt.webthingsdashboard.databinding.ActivityFullscreenBinding
-import io.webt.webthingsdashboard.WebtioGateway
-import io.webt.webthingsdashboard.SettingsMenu
-
+import io.webt.webthingsdashboard.databinding.ActivitySettingsMenuBinding
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-class FullscreenActivity : AppCompatActivity() {
+class SettingsMenu : AppCompatActivity() {
 
-    private lateinit var binding: ActivityFullscreenBinding
+    private lateinit var binding: ActivitySettingsMenuBinding
     private lateinit var fullscreenContent: TextView
     private lateinit var fullscreenContentControls: LinearLayout
     private val hideHandler = Handler()
@@ -71,46 +67,11 @@ class FullscreenActivity : AppCompatActivity() {
         false
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.main_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId){
-            R.id.Config ->{
-                startActivity(Intent(this, io.webt.webthingsdashboard.SettingsMenu::class.java))
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*
-        val token = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjZlNDEwNjFlLWJmZWQtNDExOC"+
-                "04ZjExLTk5NmQzNDZiNGVjMiJ9.eyJjbGllbnRfaWQiOiJsb2NhbC10b2tlbiIsInJvbGUiOiJ"+
-                "hY2Nlc3NfdG9rZW4iLCJzY29wZSI6Ii90aGluZ3M6cmVhZHdyaXRlIiwiaWF0IjoxNjQ3NjEyM"+
-                "TgxLCJpc3MiOiJOb3Qgc2V0LiJ9.sXxovXVCXMcuaZuilw70N7YOSLqF386F-CWDqAztMQh5PK"+
-                "8KHz0Tb4kdBboK0r-Vw0NH69f13lUIj7S07sNbfw"
-        val host = "10.0.2.2"
-        val port = "8080"
-        //TODO: get this from a configuration menu in the UI
 
-        var gateway = WebtioGateway(host, token, port)
-        gateway.initializeThings()
-        for (thing in gateway.gwThings.values)
-            for (property in thing.thingProperties.values){
-                //println("Thing: ${property.wtioThings.name} Property: ${property.name}")
-                if (property.name == "on"){
-                    property.updateValue("false")
-                }
-            }
-        */
-        binding = ActivityFullscreenBinding.inflate(layoutInflater)
+        binding = ActivitySettingsMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -126,7 +87,7 @@ class FullscreenActivity : AppCompatActivity() {
         // Upon interacting with UI controls, delay any scheduled hide()
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
-     }
+    }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
