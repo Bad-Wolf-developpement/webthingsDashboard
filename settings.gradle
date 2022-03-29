@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "webthingsDashboard"
+rootProject.name = "Webthings Dashboard"
 include ':app'
