@@ -1,5 +1,6 @@
 package io.webt.webthingsdashboard.ui.theme
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -8,17 +9,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    surface = Blue,
-    onSurface = Navy,
-    primary = Navy,
-    onPrimary = Chartreuse
+    surface = LightBlue,
+    onSurface = White,
+    primary = DarkBlue,
+    onPrimary = DarkWhite
+    /* TODO */
 )
 
+@SuppressLint("ConflictingOnColor")
 private val LightColorPalette = lightColors(
-    surface = Blue,
-    onSurface = Color.White,
-    primary = LightBlue,
-    onPrimary = Navy
+    surface = LightBlue,
+    onSurface = White,
+    primary = DarkBlue,
+    onPrimary = White,
+    background = LightBlue,
+    onBackground = White,
+    secondary = DarkBlue,
+    onSecondary = DarkWhite
 
     /* Other default colors to override
     background = Color.White,
@@ -36,7 +43,7 @@ fun WebthingsDashboardTheme(
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) {
-        DarkColorPalette
+        LightColorPalette//TODO
     } else {
         LightColorPalette
     }
