@@ -11,9 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 
 @Composable
-fun GatewaySettings(){
+fun GatewaySettings(navController: NavController){
     val roundedCorner = 5.dp
     val itemHeight = 48.dp
     val buttonWidth = 100.dp
@@ -190,9 +191,10 @@ fun GatewaySettings(){
     }
 }
 
-
+/*
 @Preview(showBackground = true, widthDp = 320)
 @Composable
 fun GwSettingsPreview(){
     GatewaySettings()
 }
+*/
