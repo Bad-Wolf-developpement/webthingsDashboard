@@ -14,12 +14,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 
 @Composable
-fun GatewaySettings(navController: NavController){
+fun GatewaySettings(navController: NavController?){
     val roundedCorner = 5.dp
     val itemHeight = 48.dp
     val buttonWidth = 100.dp
     val textFieldWidth = 220.dp
-
+    //TODO add topbar
 
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -191,10 +191,9 @@ fun GatewaySettings(navController: NavController){
     }
 }
 
-/*
+
 @Preview(showBackground = true, widthDp = 320)
 @Composable
 fun GwSettingsPreview(){
-    GatewaySettings()
+    GatewaySettings(null)
 }
-*/

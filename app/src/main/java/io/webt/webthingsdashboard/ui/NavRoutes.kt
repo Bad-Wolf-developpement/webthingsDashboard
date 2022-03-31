@@ -1,6 +1,6 @@
-package io.webt.webthingsdashboard
+package io.webt.webthingsdashboard.ui
 
 sealed class NavRoutes(val route: String) {
-    object MainApp : NavRoutes("home")
+    object HomeScreen : NavRoutes("home")
     object GatewaySetting: NavRoutes("gateway_settings")
 }
