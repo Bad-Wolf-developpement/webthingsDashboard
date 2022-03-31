@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gwName">Name</string>
+    <string name="gwAddress">Address</string>
+    <string name="gwPort">Port</string>
+    <string name="gwSsl">Enable SSL</string>
+    <string name="gwToken">Token</string>
+</resources>

@@ -1,3 +1,5 @@
 <resources>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
     <string name="app_name">Webthings Dashboard</string>
 </resources>
