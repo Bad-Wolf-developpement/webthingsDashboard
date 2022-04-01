@@ -5,4 +5,5 @@
     <string name="gwPort">Port</string>
     <string name="gwSsl">Enable SSL</string>
     <string name="gwToken">Token</string>
+    <string name="gwTopBarTitle">Gateway Settings</string>
 </resources>

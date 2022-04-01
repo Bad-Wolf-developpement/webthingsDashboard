@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,13 +14,41 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
+import io.webt.webthingsdashboard.ui.NavRoutes
+
+val backToHome = NavRoutes.HomeScreen.route
+@Composable
+fun GwSettingScreen(navController: NavController?){
+    /* TODO */
+
+    Scaffold(
+        topBar = { TopBar(navController = navController!!) },
+        content = {
+
+            GatewaySettings(navController = navController!!)
+        })
+}
 
 @Composable
-fun GatewaySettings(navController: NavController?){
+private fun TopBar(navController: NavController){
+    val arrowBack = backToHome
+    TopAppBar(
+        title = { Text(text = stringResource(id = R.string.gwTopBarTitle)) },
+        navigationIcon = {
+            IconButton(onClick = { navController.navigate(arrowBack) }) {
+                Icon(Icons.Filled.ArrowBack, "BackIcon")
+            }
+        }
+        )
+}
+
+@Composable
+fun GatewaySettings(navController: NavController){
     val roundedCorner = 5.dp
     val itemHeight = 48.dp
     val buttonWidth = 100.dp
     val textFieldWidth = 220.dp
+    val cancelClick = backToHome
     //TODO add topbar
 
     Surface(modifier = Modifier.fillMaxSize()) {
@@ -179,8 +209,9 @@ fun GatewaySettings(navController: NavController?){
                         Text(stringResource(id = R.string.save))
                     }
                     Button(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier.width(buttonWidth)
+                        onClick = { navController.navigate(cancelClick) },
+                        modifier = Modifier
+                            .width(buttonWidth)
                             .padding(start = 5.dp)
                     ) {
                         Text(stringResource(id = R.string.cancel))
@@ -195,5 +226,5 @@ fun GatewaySettings(navController: NavController?){
 @Preview(showBackground = true, widthDp = 320)
 @Composable
 fun GwSettingsPreview(){
-    GatewaySettings(null)
+    GwSettingScreen(navController = null)
 }

@@ -27,10 +27,12 @@ private fun TopBar(navController: NavController){
     TopAppBar(
         title = { Text(text = stringResource(id = R.string.app_name)) },
         actions = {
-            IconButton(onClick = { navController.navigate(NavRoutes.GatewaySetting.route) }){
-            Icon(Icons.Filled.Settings, contentDescription = "" )
+            IconButton(onClick = { navController.navigate(NavRoutes.GwSettingScreen.route) }){
+            Icon(Icons.Filled.Settings, contentDescription = "",
+            tint = MaterialTheme.colors.onBackground)
+            }
         }
-        } )
+    )
 }
 
 @Preview(showBackground = true, widthDp = 320)
