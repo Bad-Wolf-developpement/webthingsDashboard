@@ -1,6 +1,7 @@
-package io.webt.webthingsdashboard
+package io.webt.webthingsdashboard.ui.screens
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
+import io.webt.webthingsdashboard.R
 import io.webt.webthingsdashboard.ui.NavRoutes
 import io.webt.webthingsdashboard.utils.LoadGwSettings
 import io.webt.webthingsdashboard.utils.SaveGwSettings
@@ -29,7 +31,6 @@ import kotlin.properties.Delegates
 val backToHome = NavRoutes.HomeScreen.route
 @Composable
 fun GwSettingScreen(navController: NavController?){
-    /* TODO */
     Scaffold(
         topBar = { TopBar(navController = navController!!) },
         content = {
@@ -54,14 +55,12 @@ private fun TopBar(navController: NavController){
 @Composable
 fun GatewaySettings(navController: NavController){
     val roundedCorner = 5.dp
-    val itemHeight = 48.dp
+    val itemHeight = 75.dp
     val buttonWidth = 100.dp
     val textFieldWidth = 220.dp
     val cancelClick = backToHome
 
     val context = LocalContext.current
-
-    //TODO add topbar
 
     Surface(modifier = Modifier.fillMaxSize()) {
 
@@ -70,7 +69,7 @@ fun GatewaySettings(navController: NavController){
         var portState = rememberSaveable { mutableStateOf("443")}
         var sslEnabledState = rememberSaveable { mutableStateOf(true) }
         var tokenState = rememberSaveable { mutableStateOf("") }
-        var datas = LoadGwSettings(context)
+        val datas = LoadGwSettings(context)
 
         if (datas != false) {
             val mapDatas = datas as MutableMap<String, Any>
@@ -237,7 +236,7 @@ fun GatewaySettings(navController: NavController){
             ) {
                 Row(modifier = Modifier.padding(bottom = 10.dp)) {
                     Button(
-                        onClick = { SaveSettings(nameState.value,
+                        onClick = { saveSettings(nameState.value,
                             addressState.value,
                             portState.value,
                             sslEnabledState.value,
@@ -263,7 +262,7 @@ fun GatewaySettings(navController: NavController){
     }
 }
 
-private fun SaveSettings(name : String,
+private fun saveSettings(name : String,
                          address : String,
                          port : String,
                          enableSSL : Boolean,
@@ -273,12 +272,20 @@ private fun SaveSettings(name : String,
     try{
         portNb = port.toInt()
     } catch (e: NumberFormatException) {
-        /* TODO handleinvalid port */
+            Toast.makeText(
+                context,
+                R.string.invalidPort,
+                Toast.LENGTH_SHORT
+            ).show()
         return
     }
 
     if ((portNb > 65535) or (portNb < 1)){
-        //TODO handle invalid port
+        Toast.makeText(
+            context,
+            R.string.invalidPort,
+            Toast.LENGTH_SHORT
+        ).show()
         return
     }
     val data = mutableMapOf<String, Any>("name" to name,

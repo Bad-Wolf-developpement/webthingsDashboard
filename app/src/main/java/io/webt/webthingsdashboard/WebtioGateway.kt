@@ -1,5 +1,8 @@
 package io.webt.webthingsdashboard
 
+import android.content.Context
+import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
@@ -19,8 +22,7 @@ import java.net.InetAddress
 class WebtioGateway(internal val HOST: String,
                    internal val TOKEN: String,
                    PORT: String,
-                    SSL: Boolean = false) {
-
+                    SSL: Boolean = false, val context : Context) {
     internal val client = OkHttpClient()
     internal var BASE_URL: String = if (SSL){
         "https://$HOST:$PORT/things"
@@ -77,8 +79,11 @@ class WebtioGateway(internal val HOST: String,
      */
     fun initializeThings(){
         if (!this.isAvailable(this.HOST)){
-            println("Gateway Unavailable")
-            //TODO: pop a toast instead
+            Toast.makeText(
+                context,
+                R.string.invalidPort,
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
         val things = asyncCall(::getThings) as MutableMap<String, String>

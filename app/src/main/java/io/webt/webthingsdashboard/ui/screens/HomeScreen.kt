@@ -12,8 +12,6 @@ import io.webt.webthingsdashboard.R
 
 @Composable
 fun HomeScreen(navController: NavController?){
-    /* TODO */
-
     Scaffold(
         topBar = { TopBar(navController = navController!!) },
         content = {

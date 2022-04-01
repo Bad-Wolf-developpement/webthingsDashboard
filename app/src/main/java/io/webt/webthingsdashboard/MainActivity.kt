@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import io.webt.webthingsdashboard.ui.NavRoutes
+import io.webt.webthingsdashboard.ui.screens.GwSettingScreen
 import io.webt.webthingsdashboard.ui.screens.HomeScreen
 import io.webt.webthingsdashboard.ui.theme.WebthingsDashboardTheme
 
