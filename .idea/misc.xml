@@ -3,10 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/mverret/Programmation/WebthingsDashboard/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
-        <entry key="..\:/Users/mverret/Programmation/WebthingsDashboard/app/src/main/res/drawable/ic_launcher_background.xml" value="0.196" />
-        <entry key="..\:/Users/mverret/Programmation/WebthingsDashboard/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.196" />
-        <entry key="..\:/Users/mverret/Programmation/WebthingsDashboard/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.196" />
+        <entry key="../../../../layout/compose-model-1648599872582.xml" value="0.11853188929001203" />
+        <entry key="../../../../layout/compose-model-1648599873076.xml" value="0.5" />
+        <entry key="../../../../layout/compose-model-1648757511103.xml" value="0.1891891891891892" />
+        <entry key="../../../../layout/compose-model-1648768369997.xml" value="1.0" />
+        <entry key="../../../../layout/compose-model-1648768796119.xml" value="0.22" />
+        <entry key="../../../../layout/compose-model-1648768991722.xml" value="0.1891891891891892" />
+        <entry key="../../../../layout/compose-model-1648769088789.xml" value="0.1891891891891892" />
+        <entry key="../../../../layout/compose-model-1648995118050.xml" value="0.19003378378378377" />
+        <entry key="../../../../layout/compose-model-1648995293808.xml" value="0.14667535853976532" />
+        <entry key="../../../../layout/compose-model-1648995726574.xml" value="0.14667535853976532" />
       </map>
     </option>
   </component>

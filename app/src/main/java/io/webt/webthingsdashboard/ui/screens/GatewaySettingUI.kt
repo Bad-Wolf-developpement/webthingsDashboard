@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
 import io.webt.webthingsdashboard.R
 import io.webt.webthingsdashboard.ui.NavRoutes
+import io.webt.webthingsdashboard.ui.theme.WebthingsDashboardTheme
 import io.webt.webthingsdashboard.utils.LoadGwSettings
 import io.webt.webthingsdashboard.utils.SaveGwSettings
 import java.lang.NumberFormatException
@@ -299,5 +300,7 @@ private fun saveSettings(name : String,
 @Preview(showBackground = true, widthDp = 320)
 @Composable
 fun GwSettingsPreview(){
+    WebthingsDashboardTheme() {
     GwSettingScreen(navController = null)
+    }
 }

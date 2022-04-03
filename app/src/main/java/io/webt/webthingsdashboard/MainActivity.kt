@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.*
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,6 +13,8 @@ import io.webt.webthingsdashboard.ui.NavRoutes
 import io.webt.webthingsdashboard.ui.screens.GwSettingScreen
 import io.webt.webthingsdashboard.ui.screens.HomeScreen
 import io.webt.webthingsdashboard.ui.theme.WebthingsDashboardTheme
+
+const val DEVICES_PREVIEW = Devices.PIXEL_4_XL
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
