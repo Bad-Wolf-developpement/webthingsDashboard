@@ -1,4 +1,7 @@
 package io.webt.webthingsdashboard
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.Request
@@ -15,8 +18,11 @@ import org.json.JSONObject
  * title -- title of the property
  * wtioThings -- things who own this property
  */
-
-class WebtioProperty(val name: String, var title: String, private val wtioThings: WebtioThings, private val initialData: JSONObject) {
+@Parcelize
+class WebtioProperty(val name: String,
+                     var title: String,
+                     private val wtioThings: @RawValue WebtioThings,
+                     private val initialData: @RawValue JSONObject): Parcelable {
     private val BASE_URL = "${wtioThings.BASE_URL}/properties/${name}"
     private val client = wtioThings.client
     private val TOKEN = wtioThings.TOKEN

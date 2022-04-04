@@ -1,17 +1,18 @@
 package io.webt.webthingsdashboard
 
 import android.content.Context
+import android.os.Parcelable
 import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okio.IOException
 import org.json.JSONArray
 import java.net.InetAddress
-
 
 /*
  *Webthings.io gateway object
@@ -19,10 +20,13 @@ import java.net.InetAddress
  * host -- String: url or ip of the webthings gateway
  * token -- String: web token genated in the gatway to avoid login with username and password
  */
+
+@Parcelize
 class WebtioGateway(internal val HOST: String,
-                   internal val TOKEN: String,
-                   PORT: String,
-                    SSL: Boolean = false, val context : Context) {
+                    internal val TOKEN: String,
+                    val PORT: String,
+                    val SSL: Boolean = false,
+                    val context : @RawValue Context) : Parcelable {
     internal val client = OkHttpClient()
     internal var BASE_URL: String = if (SSL){
         "https://$HOST:$PORT/things"

@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import io.webt.webthingsdashboard.DEVICES_PREVIEW
 import io.webt.webthingsdashboard.R
 import io.webt.webthingsdashboard.ui.NavRoutes
 import io.webt.webthingsdashboard.ui.theme.WebthingsDashboardTheme
@@ -31,12 +33,12 @@ import kotlin.properties.Delegates
 
 val backToHome = NavRoutes.HomeScreen.route
 @Composable
-fun GwSettingScreen(navController: NavController?){
+fun GwSettingScreen(navController: NavController){
     Scaffold(
-        topBar = { TopBar(navController = navController!!) },
+        topBar = { TopBar(navController = navController) },
         content = {
 
-            GatewaySettings(navController = navController!!)
+            GatewaySettings(navController = navController)
         })
 }
 
@@ -297,10 +299,10 @@ private fun saveSettings(name : String,
     SaveGwSettings(context, data)
 }
 
-@Preview(showBackground = true, widthDp = 320)
+@Preview(showBackground = true, device = DEVICES_PREVIEW)
 @Composable
 fun GwSettingsPreview(){
     WebthingsDashboardTheme() {
-    GwSettingScreen(navController = null)
+    GwSettingScreen(rememberNavController())
     }
 }

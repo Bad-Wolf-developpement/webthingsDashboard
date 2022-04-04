@@ -1,4 +1,6 @@
 package io.webt.webthingsdashboard
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import okhttp3.Request
 import okio.IOException
 import org.json.JSONObject
@@ -11,7 +13,10 @@ import org.json.JSONObject
  * wtioGw -- gateway who own this thing
  */
 
-class WebtioThings (id: String, var name: String, val wtioGw: WebtioGateway){
+@Parcelize
+class WebtioThings (val id: String,
+                    var name: String,
+                    val wtioGw: WebtioGateway): Parcelable {
     internal val BASE_URL = "${wtioGw.BASE_URL}/${id}"
     internal val client = wtioGw.client
     internal val TOKEN = wtioGw.TOKEN

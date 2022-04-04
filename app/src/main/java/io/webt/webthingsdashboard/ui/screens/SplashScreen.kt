@@ -2,7 +2,6 @@ package io.webt.webthingsdashboard.ui.screens
 
 import android.content.Context
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -14,12 +13,11 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import io.webt.webthingsdashboard.DEVICES_PREVIEW
 import io.webt.webthingsdashboard.R
 import io.webt.webthingsdashboard.ui.NavRoutes
@@ -30,7 +28,7 @@ import io.webt.webthingsdashboard.ui.theme.WebthingsDashboardTheme
  */
 
 @Composable
-fun SplashScreen(navController: NavController?){
+fun SplashScreen(navController: NavController){
     val context = LocalContext.current
     Surface(modifier = Modifier.fillMaxSize()){
         val image: Painter = painterResource(id = R.drawable.webthings_gateway_lockup)
@@ -51,13 +49,13 @@ fun SplashScreen(navController: NavController?){
         }
     }
     Thread.sleep(1000)
-    navController!!.navigate(NavRoutes.HomeScreen.route)
+    navController.navigate(NavRoutes.HomeScreen.route)
 }
 
 @Preview(showBackground = true, device = DEVICES_PREVIEW)
 @Composable
 fun SplashScreenPreview(){
     WebthingsDashboardTheme {
-        SplashScreen(null)
+        SplashScreen(rememberNavController())
     }
 }
