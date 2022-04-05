@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import io.webt.webthingsdashboard.DEVICES_PREVIEW
 import io.webt.webthingsdashboard.R
+import io.webt.webthingsdashboard.gwSettingsDatas
 import io.webt.webthingsdashboard.ui.NavRoutes
 import io.webt.webthingsdashboard.ui.theme.WebthingsDashboardTheme
 import io.webt.webthingsdashboard.utils.LoadGwSettings
@@ -72,10 +73,9 @@ fun GatewaySettings(navController: NavController){
         var portState = rememberSaveable { mutableStateOf("443")}
         var sslEnabledState = rememberSaveable { mutableStateOf(true) }
         var tokenState = rememberSaveable { mutableStateOf("") }
-        val datas = LoadGwSettings(context)
 
-        if (datas != false) {
-            val mapDatas = datas as MutableMap<String, Any>
+        if (gwSettingsDatas != false) {
+            val mapDatas = gwSettingsDatas as MutableMap<String, Any>
             nameState = rememberSaveable { mutableStateOf(mapDatas["name"] as String) }
             addressState = rememberSaveable { mutableStateOf(mapDatas["address"] as String) }
             portState = rememberSaveable { mutableStateOf((mapDatas["port"] as Int).toString())}

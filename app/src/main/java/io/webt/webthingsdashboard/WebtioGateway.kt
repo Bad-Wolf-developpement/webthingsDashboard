@@ -13,6 +13,7 @@ import okhttp3.Request
 import okio.IOException
 import org.json.JSONArray
 import java.net.InetAddress
+import java.net.UnknownHostException
 
 /*
  *Webthings.io gateway object
@@ -86,7 +87,7 @@ class WebtioGateway(internal val HOST: String,
             Toast.makeText(
                 context,
                 R.string.invalidPort,
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_LONG
             ).show()
             return
         }
@@ -109,6 +110,10 @@ class WebtioGateway(internal val HOST: String,
      * return Boolean
      */
     internal fun isAvailable(host: String): Boolean {
-        return asyncCall { InetAddress.getByName(host).isReachable(30) } as Boolean
+        return try {
+            asyncCall { InetAddress.getByName(host).isReachable(30) } as Boolean
+        }catch(e: UnknownHostException){
+            false
+        }
     }
 }

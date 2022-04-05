@@ -18,6 +18,7 @@ fun SaveGwSettings(context: Context, data: MutableMap<String, Any>){
     val outputStream = ObjectOutputStream(fileOutput)
     outputStream.writeObject(data)
     outputStream.close()
+    fileOutput.close()
 }
 
 fun LoadGwSettings(context: Context): Any{
@@ -30,7 +31,8 @@ fun LoadGwSettings(context: Context): Any{
     val fileInput = context.openFileInput(gwSettingsFilename)
     val inputStream = ObjectInputStream(fileInput)
     val data = inputStream.readObject() as MutableMap<String, Any>
-    Log.d(TAG, "Data to save $data")
+    Log.d(TAG, "Data loaded: $data")
     inputStream.close()
+    fileInput.close()
     return data
 }

@@ -4,4 +4,5 @@ sealed class NavRoutes(val route: String) {
     object SplashScreen : NavRoutes("splash_screen")
     object HomeScreen : NavRoutes("home")
     object GwSettingScreen: NavRoutes("gateway_settings")
+    object AddDashboard: NavRoutes("add_dashboard")
 }
